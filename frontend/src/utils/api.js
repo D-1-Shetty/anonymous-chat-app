@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// Use direct URL since proxy isn't working
-const API_BASE_URL = 'http://localhost:5000/api';
+// Use environment variable for production, fallback to localhost for development
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
@@ -20,14 +20,14 @@ api.interceptors.request.use(
   }
 );
 
-// Response interceptor - FIXED: Added missing quote
+// Response interceptor
 api.interceptors.response.use(
   (response) => {
     console.log(`✅ Response from ${response.config.url}:`, response.status);
     return response.data;
   },
   (error) => {
-    console.error('❌ API Error:', error.message); // FIXED: Added missing quote
+    console.error('❌ API Error:', error.message);
     return Promise.reject(error);
   }
 );
