@@ -1,0 +1,10 @@
+{
+  "name": "anonymous-chat-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "cd backend && npm start"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
